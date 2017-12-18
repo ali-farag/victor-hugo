@@ -1,6 +1,6 @@
 +++
-tags = []
-categories = []
+title: "API Test"
+draft: false
 +++
 
 package main
@@ -14,42 +14,19 @@ import(
     "time"
 )
 
-type people struct {  
-    Number int 'json:"number"'
-}
-
 func main() {
 
-    url := "http://api.open-notify.org/astros.json"
+	response, err := http.Get("http://pokeapi.co/api/v2/pokedex/kanto/")
 
-    spaceClient := http.Client{
-        Timeout: time.Second * 2, // Maximum of 2 secs
-    }
+	if err != nil {
+		fmt.Print(err.Error())
+		os.Exit(1)
+	}
+	
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(responseData))
 
-    req, err := http.NewRequest(http.MethodGet, url, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    req.Header.Set("User-Agent", "spacecount-tutorial")
-
-    res, getErr := spaceClient.Do(req)
-    if getErr != nil {
-        log.Fatal(getErr)
-    }
-
-    body, readErr := ioutil.ReadAll(res.Body)
-    if readErr != nil {
-        log.Fatal(readErr)
-    }
-
-    people1 := people{}
-    jsonErr := json.Unmarshal(body, &people1)
-    if jsonErr != nil {
-        log.Fatal(jsonErr)
-    }
-
-    fmt.Println(people1.Number)
-    
-    fmt.Printf("HTTP: %s\n", res.Status)
 }
