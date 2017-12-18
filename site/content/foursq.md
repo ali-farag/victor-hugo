@@ -30,7 +30,7 @@ type Numverify struct {
 func main() {
 	phone := "15712760612"
 	safePhone := url.QueryEscape(phone)
-	url := fmt.Sprintf("http://apilayer.net/api/validate?access_key=YOUR_ACCESS_KEY&number=%s", safePhone)
+	url := fmt.Sprintf("http://apilayer.net/api/validate?access_key=32c85000e678256ddc0c6210fe01f966&number=15712760612", safePhone)
 	// Build the request
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
