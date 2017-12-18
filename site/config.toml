@@ -157,7 +157,7 @@ paginate = 10
 [[menu.main]]
 	name = "API TEST"
 	url  = "foursq"
-	weight = 10    
+	weight = 5    
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details: 

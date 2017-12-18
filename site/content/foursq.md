@@ -1,8 +1,3 @@
-+++
-title: "API Test"
-draft: false
-+++
-
 package main
 
 import(
