@@ -18,12 +18,6 @@ func main() {
 
     c := coinbase.ApiKeyClient(os.Getenv("2hSAn1w8iuSXQDf2"), os.Getenv("DruTEo6fc5GfTlsj0LpeMDIn43ss7CNU"))
 
-    response, err := http.Get("https://api.coinbase.com/v2/prices/spot?currency=USD")
-    if err != nil {
-        fmt.Printf("The HTTP request failed with error %s\n", err)
-    } 
-    else {
-
     price, err := c.GetBuyPrice(1)
     if err != nil {
 	    log.Fatal(err)
@@ -44,7 +38,7 @@ func main() {
         // '9.90'
         fmt.Println(price.Total.Amount) // Total is amount you will receive (after fees)
         // '9.65'
-    }
+    
     
     fmt.Println("Terminating the application...")
 }
