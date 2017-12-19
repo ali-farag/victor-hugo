@@ -10,6 +10,7 @@ import (
     "fmt"
     "io/ioutil"
     "net/http"
+    "github.com/fabioberger/coinbase-go"
 )
 
 func main() {
@@ -20,43 +21,30 @@ func main() {
     response, err := http.Get("https://api.coinbase.com/v2/prices/spot?currency=USD")
     if err != nil {
         fmt.Printf("The HTTP request failed with error %s\n", err)
-    } else {
-        data, _ := ioutil.ReadAll(response.Body)
-        fmt.Println(string(data))
+    } 
+    else {
 
-        fmt.Printf(c)
-                
-price, err := c.GetBuyPrice(1)
-if err != nil {
-	log.Fatal(err)
-}
-fmt.Println(price.Subtotal.Amount) 
-// Subtotal does not include fees
-
-fmt.Println(price.Total.Amount)
-// Total includes coinbase & bank fee
-
-
-price, err = c.GetSellPrice(1)
-if err != nil {
-	log.Fatal(err)
-}
-fmt.Println(price.Subtotal.Amount) // Subtotal is current market price
-// '9.90'
-fmt.Println(price.Total.Amount) // Total is amount you will receive (after fees)
-// '9.65'
-
-
-
-    }
-    <!-- jsonData := map[string]string{"firstname": "Ali", "lastname": "Farag"}
-    jsonValue, _ := json.Marshal(jsonData)
-    response, err = http.Post("https://httpbin.org/post", "application/json", bytes.NewBuffer(jsonValue))
+    price, err := c.GetBuyPrice(1)
     if err != nil {
-        fmt.Printf("The HTTP request failed with error %s\n", err)
-    } else {
-        data, _ := ioutil.ReadAll(response.Body)
-        fmt.Println(string(data))
-    } -->
+	    log.Fatal(err)
+    }
+        fmt.Println(price.Subtotal.Amount) 
+        // Subtotal does not include fees
+
+        fmt.Println(price.Total.Amount)
+        // Total includes coinbase & bank fee
+
+
+        price, err = c.GetSellPrice(1)
+        if err != nil {
+	        log.Fatal(err)
+        }
+        
+        fmt.Println(price.Subtotal.Amount) // Subtotal is current market price
+        // '9.90'
+        fmt.Println(price.Total.Amount) // Total is amount you will receive (after fees)
+        // '9.65'
+    }
+    
     fmt.Println("Terminating the application...")
 }
